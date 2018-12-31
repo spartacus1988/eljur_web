@@ -2,54 +2,64 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 
-@model IEnumerable<eljur_web.Models.Events>
+@*@model IEnumerable<eljur_web.Models.Events>*@
+
+@using eljur_web.Models
+@model IndexViewModel
 
 @{
-    //ViewData["Title"] = "Index";
+    ViewData["Title"] = "Index";
 
 }
 
-<h2>Index</h2>
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+<h2>Список событий по ученикам</h2>
+
 <table class="table">
-    <thead>
+    <tr>
+        <th>Ид события</th>
+        <th>Имя события</th>
+        <th>Уведомления для родителей разрешены</th>
+        <th>Уведомления для администрации разрешены</th>
+        <th>Уведомление для родителей было отправлено</th>
+        <th>Уведомления для администрации было отправлено</th>
+        <th>Время события</th>
+        <th>Ид ученика</th>
+    </tr>
+    @foreach (Events e in Model.Events)
+    {
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.EventName)
-            </th>
-            <th></th>
+            <td>@e.EventId</td>
+            <td>@e.EventName</td>
+            <td>@e.NotifyEnable</td>
+            <td>@e.NotifyEnableDirector</td>
+            <td>@e.NotifyWasSend</td>
+            <td>@e.NotifyWasSendDirector</td>
+            <td>@e.EventTime</td>
+            <td>@e.PupilIdOld</td>
+
         </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.EventId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EventName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NotifyEnable)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NotifyWasSend)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EventTime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PupilIdOld)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.EventId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.EventName">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.EventTime">Delete</a>
-            </td>
-        </tr>
-        }
-    </tbody>
+    }
 </table>
+
+@if (Model.PageViewModel.HasPreviousPage)
+{
+    <a asp-action="Index"
+       asp-route-page="@(Model.PageViewModel.PageNumber - 1)"
+       class="btn btn-default btn">
+        <i class="glyphicon glyphicon-chevron-left"></i>
+        Назад
+    </a>
+}
+
+@if (Model.PageViewModel.HasNextPage)
+{
+    <a asp-action="Index"
+       asp-route-page="@(Model.PageViewModel.PageNumber + 1)"
+       class="btn btn-default btn">
+        Вперед
+        <i class="glyphicon glyphicon-chevron-right"></i>
+</a>
+}
+
+
+
