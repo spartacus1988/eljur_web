@@ -18,17 +18,50 @@
 
 <table class="table">
     <tr>
-        <th>Ид события</th>
-        <th>Имя события</th>
-        <th>Уведомления для родителей разрешены</th>
-        <th>Уведомления для администрации разрешены</th>
-        <th>Уведомление для родителей было отправлено</th>
-        <th>Уведомление для администрации было отправлено</th>
-        <th>Время события</th>
-        <th>Ид пропуска ученика</th>
-        <th>Ид ЭлЖур ученика</th>
-        <th>ФИО</th>
-        <th>Класс</th>
+        <th>
+            <a asp-action="Index"
+               asp-route-sortOrder="@(Model.SortViewModel.EventIdSort)">Ид события</a>
+        </th>
+        <th>
+            <a asp-action="Index"
+               asp-route-sortOrder="@(Model.SortViewModel.EventNameSort)">Имя события</a>
+        </th>
+        <th>
+            <a asp-action="Index"
+               asp-route-sortOrder="@(Model.SortViewModel.NotifyEnableSort)">Уведомления для родителей разрешены</a>
+        </th>
+        <th>
+            <a asp-action="Index"
+               asp-route-sortOrder="@(Model.SortViewModel.NotifyEnableSort)">Уведомления для администрации разрешены</a>
+        </th>
+        <th>
+            <a asp-action="Index"
+               asp-route-sortOrder="@(Model.SortViewModel.NotifyWasSendSort)">Уведомление для родителей было отправлено</a>
+        </th>
+        <th>
+            <a asp-action="Index"
+               asp-route-sortOrder="@(Model.SortViewModel.NotifyWasSendSort)">Уведомление для администрации было отправлено</a>
+        </th>
+        <th>
+            <a asp-action="Index"
+               asp-route-sortOrder="@(Model.SortViewModel.EventTimeSort)">Время события</a>
+        </th>
+        <th>
+            <a asp-action="Index"
+               asp-route-sortOrder="@(Model.SortViewModel.PupilIdOldSort)">Ид пропуска ученика</a>
+        </th>
+        <th>
+            <a asp-action="Index"
+               asp-route-sortOrder="@(Model.SortViewModel.EljurAccountIdSort)">Ид ЭлЖур ученика</a>
+        </th>
+        <th>
+            <a asp-action="Index"
+               asp-route-sortOrder="@(Model.SortViewModel.FullFioSort)">ФИО</a>
+        </th>
+        <th>
+            <a asp-action="Index"
+               asp-route-sortOrder="@(Model.SortViewModel.ClasSort)">Класс</a>
+        </th>
     </tr>
     @*@foreach (Events e in Model.Events)*@
     @foreach (var pair in Model.mapEventsPupils)
@@ -54,6 +87,7 @@
 {
     <a asp-action="Index"
        asp-route-page="@(Model.PageViewModel.PageNumber - 1)"
+       asp-route-sortorder="@(Model.SortViewModel.Current)"
        class="btn btn-default btn">
         <i class="glyphicon glyphicon-chevron-left"></i>
         Назад
@@ -64,6 +98,7 @@
 {
     <a asp-action="Index"
        asp-route-page="@(Model.PageViewModel.PageNumber + 1)"
+       asp-route-sortorder="@(Model.SortViewModel.Current)"
        class="btn btn-default btn">
         Вперед
         <i class="glyphicon glyphicon-chevron-right"></i>
