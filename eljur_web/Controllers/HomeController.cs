@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using eljur_web.Models;
 
-// For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace eljur_web.Controllers
 {
@@ -32,14 +31,25 @@ namespace eljur_web.Controllers
 
             IQueryable<Events> source = _context.Events;
             var list =  source.ToList();
-            var count =  source.Count(); // CountAsync();
+            var count =  source.Count(); 
             var items =  source.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+
+            IQueryable<Pupils> sourcePupils = _context.Pupils;
+            var map = new Dictionary<Events, Pupils>();
+            //map.Add("cat", "orange");
+            foreach (Events e in items)
+            {              
+                Pupils p = _context.Pupils.SingleOrDefault(pup => pup.PupilIdOld == e.PupilIdOld);
+                map.Add(e, p);
+            }
+
 
             PageViewModel pageViewModel = new PageViewModel(count, page, pageSize);
             IndexViewModel viewModel = new IndexViewModel
             {
                 PageViewModel = pageViewModel,
-                Events = items
+                Events = items,
+                mapEventsPupils = map
             };
             return View(viewModel);
         }

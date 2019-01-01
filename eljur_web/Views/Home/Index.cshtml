@@ -23,23 +23,30 @@
         <th>Уведомления для родителей разрешены</th>
         <th>Уведомления для администрации разрешены</th>
         <th>Уведомление для родителей было отправлено</th>
-        <th>Уведомления для администрации было отправлено</th>
+        <th>Уведомление для администрации было отправлено</th>
         <th>Время события</th>
-        <th>Ид ученика</th>
+        <th>Ид пропуска ученика</th>
+        <th>Ид ЭлЖур ученика</th>
+        <th>ФИО</th>
+        <th>Класс</th>
     </tr>
-    @foreach (Events e in Model.Events)
+    @*@foreach (Events e in Model.Events)*@
+    @foreach (var pair in Model.mapEventsPupils)
     {
-        <tr>
-            <td>@e.EventId</td>
-            <td>@e.EventName</td>
-            <td>@e.NotifyEnable</td>
-            <td>@e.NotifyEnableDirector</td>
-            <td>@e.NotifyWasSend</td>
-            <td>@e.NotifyWasSendDirector</td>
-            <td>@e.EventTime</td>
-            <td>@e.PupilIdOld</td>
+    <tr>
+        <td>@pair.Key.EventId</td>
+        <td>@pair.Key.EventName</td>
+        <td>@pair.Key.NotifyEnable</td>
+        <td>@pair.Key.NotifyEnableDirector</td>
+        <td>@pair.Key.NotifyWasSend</td>
+        <td>@pair.Key.NotifyWasSendDirector</td>
+        <td>@pair.Key.EventTime</td>
+        <td>@pair.Key.PupilIdOld</td>
+        <td>@pair.Value.EljurAccountId</td>
+        <td>@pair.Value.FullFio</td>
+        <td>@pair.Value.Clas</td>
 
-        </tr>
+    </tr>
     }
 </table>
 
