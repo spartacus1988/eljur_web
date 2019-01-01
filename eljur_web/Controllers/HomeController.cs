@@ -28,7 +28,7 @@ namespace eljur_web.Controllers
 
         public async Task<IActionResult> Index(int page = 1)
         {
-            int pageSize = 3;   // количество элементов на странице
+            int pageSize = 10;   // количество элементов на странице
 
             IQueryable<Events> source = _context.Events;
             var list =  source.ToList();
