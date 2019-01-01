@@ -1,16 +1,18 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-
-@*@model IEnumerable<eljur_web.Models.Events>*@
+﻿@*@model IEnumerable<eljur_web.Models.Events>*@
 
 @using eljur_web.Models
-@model IndexViewModel
+
+@model eljur_web.Models.IndexViewModel
+
+@{Layout = "~/Views/Shared/_ViewStart.cshtml";}
+
 
 @{
     ViewData["Title"] = "Index";
 
 }
+
+<link href="/bootstrap4-glyphicons/css/bootstrap-glyphicons.min.css" rel="stylesheet" type="text/css" />
 
 <h2>Список событий по ученикам</h2>
 
@@ -58,7 +60,7 @@
        class="btn btn-default btn">
         Вперед
         <i class="glyphicon glyphicon-chevron-right"></i>
-</a>
+    </a>
 }
 
 
