@@ -4,3 +4,4 @@ bin/
 obj/
 eljur_web.csproj.user
 BACKUPS/
+eljur_web/wwwwroot/lib
